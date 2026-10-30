@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IntelliBI | Python Technical Assessment</title>
+<style>
+:root{--navy:#0b1f3a;--navy2:#162f55;--blue:#2f7de1;--ink:#1d2a3a;--muted:#5c6b80;--line:#dbe3ee;--bg:#f4f7fb;--ok:#1b7f43;--warn:#b26a00;--bad:#b3261e}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+header{background:var(--navy);color:#fff;padding:18px 24px}
+.brand{font-weight:800;letter-spacing:.14em;font-size:13px;color:#8cbcff}
+header h1{margin:2px 0 0;font-size:20px;letter-spacing:.05em}
+main{max-width:1080px;margin:0 auto;padding:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px;margin-bottom:18px}
+.muted{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.secbtn{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;text-align:left;cursor:pointer;font:inherit;color:var(--ink)}
+.secbtn:hover{border-color:var(--blue);box-shadow:0 2px 8px rgba(47,125,225,.15)}
+.secbtn .num{font-size:12px;color:var(--blue);font-weight:700}
+.secbtn .co{font-weight:700;margin-top:2px}
+.secbtn .role{font-size:12px;color:var(--muted)}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+input[type=text],textarea{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px}
+textarea.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;min-height:200px;background:#0e1726;color:#e7f0ff}
+textarea.stdin{font-family:ui-monospace,Menlo,Consolas,monospace;min-height:60px}
+button{font:inherit;border:0;border-radius:8px;padding:10px 16px;cursor:pointer;background:#e8eef7;color:var(--ink)}
+button.primary{background:var(--navy);color:#fff;font-weight:700}
+button.run{background:var(--blue);color:#fff;font-weight:700}
+button:disabled{opacity:.5;cursor:not-allowed}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.top{background:var(--navy);color:#fff;border-radius:10px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.co-label{font-weight:800;font-size:18px;letter-spacing:.06em}
+.sub{font-size:12px;color:#b9cde8}
+.timer{background:#fff;color:var(--navy);border-radius:8px;padding:6px 14px;text-align:center;min-width:120px}
+.timer span{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.timer b{font-size:26px;font-variant-numeric:tabular-nums}
+.timer.urgent{background:var(--bad);color:#fff;animation:pulse 1s infinite}
+.timer.urgent span{color:#ffe0dd}
+@keyframes pulse{50%{opacity:.6}}
+.progress{height:6px;background:var(--line);border-radius:4px;overflow:hidden;margin-bottom:16px}
+.progress div{height:100%;background:var(--blue);width:0%;transition:width .3s}
+.qtag{font-size:12px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.08em}
+.opt{display:block;border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:8px 0;cursor:pointer}
+.opt:hover{background:#f5f9ff}
+.opt input{margin-right:8px}
+pre.ex{background:#f0f4fa;border-radius:6px;padding:10px;font-size:13px;white-space:pre-wrap}
+.console{background:#0a1220;color:#b8ffd0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;border-radius:8px;padding:12px;min-height:70px;white-space:pre-wrap}
+.console.err{color:#ffb4ab}
+.note{font-size:13px;color:var(--muted)}
+.banner{padding:12px 14px;border-radius:8px;margin-bottom:14px;font-size:14px}
+.banner.warn{background:#fff4e0;color:#7a4a00}
+.banner.bad{background:#fde8e6;color:#8a1c14}
+.banner.ok{background:#e6f6ec;color:#14603a}
+.overlay{position:fixed;inset:0;background:rgba(11,31,58,.7);display:none;align-items:center;justify-content:center;color:#fff;font-weight:600;z-index:9}
+.overlay.show{display:flex}
+/* result */
+.result-head{text-align:center;border-bottom:2px solid var(--line);padding-bottom:14px;margin-bottom:16px}
+.result-head .co-label{color:var(--navy)}
+table.res{width:100%;border-collapse:collapse;font-size:15px}
+table.res td{padding:9px 6px;border-bottom:1px solid var(--line)}
+table.res td:last-child{text-align:right;font-weight:700}
+.total{font-size:30px;font-weight:800;color:var(--navy);text-align:center;margin:14px 0 4px}
+.cat{text-align:center;font-weight:700;color:var(--blue);margin-bottom:10px}
+.feedback{background:#f0f6ff;border-radius:8px;padding:14px;font-size:15px}
+.hidden{display:none !important}
+@media print{
+  header,.noprint,.btnrow{display:none !important}
+  body{background:#fff}
+  main{padding:0;max-width:none}
+  .card{border:0;box-shadow:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">INTELLIBI</div>
+  <h1>PYTHON TECHNICAL ASSESSMENT</h1>
+</header>
+
+<main>
+  <div id="fatal" class="banner bad hidden"></div>
+
+  <!-- LANDING: section selection and student login -->
+  <section id="landing">
+    <div class="card">
+      <p>Select the section assigned by your instructor. Each section has 2 multiple-choice questions and 1 Python coding question, with a 5-minute timer. Your score out of 10 is shown immediately after submission.</p>
+      <p class="note">Fictional, company-themed simulations inspired by broad industry expectations. They are not official company assessments and are not endorsed by any company named.</p>
+    </div>
+    <div class="grid" id="sectionGrid"></div>
+
+    <div id="loginPanel" class="card hidden" style="margin-top:18px">
+      <h3 id="loginTitle" style="margin-top:0"></h3>
+      <label for="stuName">Full name</label>
+      <input id="stuName" type="text" maxlength="80" autocomplete="off">
+      <label for="stuId">Roll number / student ID</label>
+      <input id="stuId" type="text" maxlength="30" autocomplete="off">
+      <div class="btnrow">
+        <button id="continueBtn" class="primary">CONTINUE</button>
+        <button id="cancelLogin">Cancel</button>
+      </div>
+      <div id="loginMsg" class="banner bad hidden"></div>
+      <div id="instructions" class="hidden">
+        <h4>Before you start</h4>
+        <ul class="muted">
+          <li>The timer starts only when you click START ASSESSMENT.</li>
+          <li>You have 5 minutes. Refreshing the page will not reset the timer.</li>
+          <li>The assessment submits automatically when time runs out.</li>
+          <li>You can attempt a section once. Results are final after submission.</li>
+        </ul>
+        <button id="startBtn" class="primary">START ASSESSMENT</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASSESSMENT -->
+  <section id="assessment" class="hidden">
+    <div id="assessApp"></div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="resultView" class="hidden">
+    <div id="resultApp"></div>
+  </section>
+</main>
+
+<div id="overlay" class="overlay"><div id="overlayText">Grading…</div></div>
+
+<!-- Python prelude executed inside the Pyodide worker -->
+<script type="text/plain" id="prelude">
+import sys, io, builtins
+
+def run_student(code, stdin_text):
+    parts = stdin_text.split("\n")
+    if parts and parts[-1] == "":
+        parts = parts[:-1]
+    feed = iter(parts)
+
+    def fake_input(prompt=""):
+        try:
+            return next(feed)
+        except StopIteration:
+            raise EOFError("input() called with no more input")
+
+    buf = io.StringIO()
+    old_out = sys.stdout
+    old_in = builtins.input
+    sys.stdout = buf
+    builtins.input = fake_input
+    err = ""
+    try:
+        exec(compile(code, "<student>", "exec"), {"__name__": "__main__"})
+    except BaseException as ex:
+        err = type(ex).__name__ + ": " + str(ex)
+    finally:
+        sys.stdout = old_out
+        builtins.input = old_in
+    return (buf.getvalue(), err)
+</script>
+
+<!-- Worker source (the prelude text is injected at runtime) -->
+<script type="text/plain" id="workerSrc">
+importScripts('https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js');
+let pyPromise = null;
+function getPy() {
+  if (!pyPromise) {
+    pyPromise = loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/' })
+      .then(async (p) => { await p.runPythonAsync(PRELUDE_SRC); return p; });
+    pyPromise.catch(() => { pyPromise = null; });
+  }
+  return pyPromise;
+}
+self.onmessage = async (e) => {
+  const { id, code, stdin } = e.data;
+  try {
+    const py = await getPy();
+    py.globals.set('__student_code', code);
+    py.globals.set('__student_stdin', stdin);
+    const res = py.runPython('run_student(__student_code, __student_stdin)');
+    const arr = res.toJs();
+    res.destroy();
+    self.postMessage({ id, ok: true, out: arr[0], err: arr[1] });
+  } catch (err) {
+    self.postMessage({ id, ok: false, error: String((err && err.message) || err) });
+  }
+};
+</script>
+
+<script>
+/* ---------- configuration ---------- */
+const CONFIG = {
+  bankUrl: 'intellibi_question_bank.json',
+  durationMs: 5 * 60 * 1000,
+  firstLoadTimeoutMs: 60000,   // Pyodide download on first run
+  runTimeoutMs: 4000,          // per run once loaded
+  storePrefix: 'ibi-v1'
+};
+const ACTIVE_KEY = CONFIG.storePrefix + ':active';
+
+/* ---------- state ---------- */
+let bank = null;
+let cur = null;              // current attempt record
+let timerHandle = null;
+let worker = null;
+let workerUrl = null;
+let reqId = 0;
+let pyLoaded = false;
+let finalizing = false;
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+/* ---------- storage (per browser; see operating guide) ---------- */
+function recKey(secId, sid) { return `${CONFIG.storePrefix}:${secId}:${sid}`; }
+function saveRec(rec) { try { localStorage.setItem(recKey(rec.sectionId, rec.sid), JSON.stringify(rec)); } catch (e) {} }
+function loadRec(secId, sid) { try { const v = localStorage.getItem(recKey(secId, sid)); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
+function setActive(v) { try { if (v) localStorage.setItem(ACTIVE_KEY, JSON.stringify(v)); else localStorage.removeItem(ACTIVE_KEY); } catch (e) {} }
+function getActive() { try { const v = localStorage.getItem(ACTIVE_KEY); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
+
+/* Scan this browser for any record belonging to the same student ID. */
+function findRecordsForStudent(sid) {
+  const out = [];
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (!k || !k.startsWith(CONFIG.storePrefix + ':') || k === ACTIVE_KEY) continue;
+      const rec = JSON.parse(localStorage.getItem(k));
+      if (rec && rec.sid === sid) out.push(rec);
+    }
+  } catch (e) {}
+  return out;
+}
+
+function currentSection() { return bank.sections.find((s) => s.id === cur.sectionId); }
+function sectionById(id) { return bank.sections.find((s) => s.id === id); }
+
+/* ---------- helpers ---------- */
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function fmt(ms) {
+  const total = Math.ceil(ms / 1000);
+  const m = Math.floor(total / 60), s = total % 60;
+  return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+}
+function normalise(s) {
+  return String(s).replace(/\r/g, '').split('\n').map((l) => l.trimEnd()).join('\n').trim();
+}
+function isBlank(code) {
+  return code.split('\n').every((l) => { const t = l.trim(); return t === '' || t.startsWith('#'); });
+}
+function category(total) {
+  if (total >= 9) return 'Excellent';
+  if (total >= 7) return 'Good';
+  if (total >= 5) return 'Developing';
+  return 'Needs Improvement';
+}
+const FEEDBACK = {
+  'Excellent': 'Excellent work. You showed strong command of the Python fundamentals and solved the coding task correctly. Keep building on this.',
+  'Good': 'Good work. You have a solid grasp of the core concepts. Reviewing the questions you missed will help you move up a level.',
+  'Developing': 'You are developing well. Focus on the areas you found tricky, especially how your code handles edge cases and the exact output format.',
+  'Needs Improvement': 'Keep practising. Revisit the module on the topics below, then try the coding task again with small test inputs of your own.'
+};
+
+/* ---------- Python worker ---------- */
+function buildWorkerUrl(prelude) {
+  const workerText = document.getElementById('workerSrc').textContent;
+  const src = 'const PRELUDE_SRC = ' + JSON.stringify(prelude) + ';\n' + workerText;
+  return URL.createObjectURL(new Blob([src], { type: 'text/javascript' }));
+}
+function killWorker() {
+  if (worker) worker.terminate();
+  worker = null;
+  pyLoaded = false;
+}
+function ensureWorker() {
+  if (!workerUrl) workerUrl = buildWorkerUrl(document.getElementById('prelude').textContent);
+  if (!worker) worker = new Worker(workerUrl);
+  return worker;
+}
+/* Runs code once with the given stdin. Resolves with {out, err} | {timedOut} | {loadError}. */
+function runPython(code, stdin) {
+  return new Promise((resolve) => {
+    const w = ensureWorker();
+    const id = ++reqId;
+    let done = false;
+    const limit = pyLoaded ? CONFIG.runTimeoutMs : CONFIG.firstLoadTimeoutMs;
+    const killer = setTimeout(() => {
+      if (done) return;
+      done = true;
+      killWorker();
+      resolve({ timedOut: true });
+    }, limit);
+    w.onmessage = (e) => {
+      if (done || e.data.id !== id) return;
+      done = true;
+      clearTimeout(killer);
+      if (e.data.ok) { pyLoaded = true; resolve({ out: e.data.out, err: e.data.err }); }
+      else resolve({ loadError: e.data.error });
+    };
+    w.onerror = (e) => {
+      if (done) return;
+      done = true;
+      clearTimeout(killer);
+      killWorker();
+      resolve({ loadError: e.message || 'The Python worker failed to start.' });
+    };
+    w.postMessage({ id, code, stdin });
+  });
+}
+
+/* ---------- automatic coding evaluation ---------- */
+function rubricMarks(passed, total, outputSeen) {
+  if (total > 0 && passed === total) return 6;
+  if (passed === 0) return outputSeen ? 1 : 0;
+  const ratio = passed / total;
+  if (ratio > 0.8) return 5;
+  if (ratio >= 0.67) return 4;
+  if (ratio >= 0.5) return 3;
+  return 2;
+}
+async function gradeCoding(code, tests) {
+  if (isBlank(code)) return { marks: 0, passed: 0, total: tests.length, blank: true, statuses: [] };
+  let passed = 0, outputSeen = false, firstErrType = null;
+  const statuses = [];
+  for (const t of tests) {
+    const r = await runPython(code, t.stdin);
+    if (r.loadError) return { marks: 0, passed: 0, total: tests.length, loadError: r.loadError, statuses };
+    if (r.timedOut) { statuses.push('Time limit exceeded'); continue; }
+    if (r.err) {
+      statuses.push('Runtime error');
+      if (!firstErrType) firstErrType = r.err.split(':')[0];   // type name only, never the message
+      continue;
+    }
+    if (r.out.trim() !== '') outputSeen = true;
+    const ok = normalise(r.out) === normalise(t.expected);
+    if (ok) passed++;
+    statuses.push(ok ? 'Passed' : 'Failed');
+  }
+  return { marks: rubricMarks(passed, tests.length, outputSeen), passed, total: tests.length, firstErrType, statuses };
+}
+
+/* ---------- landing ---------- */
+let selectedSection = null;
+function renderGrid() {
+  $('sectionGrid').innerHTML = bank.sections.map((s) =>
+    `<button class="secbtn" data-id="${s.id}">
+       <div class="num">SECTION ${s.id}</div>
+       <div class="co">${esc(s.company)}</div>
+       <div class="role">${esc(s.role)}</div>
+     </button>`).join('');
+  document.querySelectorAll('.secbtn').forEach((b) => b.addEventListener('click', () => chooseSection(b.dataset.id)));
+}
+function chooseSection(id) {
+  selectedSection = sectionById(id);
+  $('loginTitle').textContent = `${selectedSection.company.toUpperCase()} | TECH ASSESSMENT · Section ${selectedSection.id}`;
+  $('loginPanel').classList.remove('hidden');
+  $('instructions').classList.add('hidden');
+  $('loginMsg').classList.add('hidden');
+  $('loginPanel').scrollIntoView({ behavior: 'smooth' });
+}
+function showLoginMsg(text, kind) {
+  const el = $('loginMsg');
+  el.className = 'banner ' + kind;
+  el.textContent = text;
+}
+function onContinue() {
+  const name = $('stuName').value.trim();
+  const sid = $('stuId').value.trim().toUpperCase();
+  if (name.length < 2) return showLoginMsg('Please enter your full name.', 'bad');
+  if (!sid) return showLoginMsg('Please enter your roll number or student ID.', 'bad');
+
+  // A student may attempt only once, across all sections in this browser.
+  const mine = findRecordsForStudent(sid);
+  const submitted = mine.find((r) => r.status === 'submitted');
+  if (submitted) {
+    cur = submitted;
+    return renderResult();
+  }
+  const inProgress = mine.find((r) => r.status === 'in_progress');
+  if (inProgress && inProgress.sectionId !== selectedSection.id) {
+    return showLoginMsg(`This ID already has an assessment in progress (Section ${inProgress.sectionId}). Finish that one first.`, 'bad');
+  }
+  if (inProgress) {
+    cur = inProgress;
+    return openAssessment();
+  }
+  $('instructions').classList.remove('hidden');
+  $('loginMsg').classList.add('hidden');
+  pendingLogin = { name, sid };
+}
+let pendingLogin = null;
+
+function onStart() {
+  if (!pendingLogin) return;
+  const now = Date.now();
+  const sid = pendingLogin.sid;
+  cur = {
+    sectionId: selectedSection.id,
+    name: pendingLogin.name,
+    sid,
+    status: 'in_progress',
+    startedAt: now,
+    deadline: now + CONFIG.durationMs,
+    attemptId: `${selectedSection.id}-${sid.replace(/[^A-Z0-9]/g, '')}-${now.toString(36).toUpperCase()}`,
+    mcqOrder: selectedSection.mcqs.map((m) => shuffle(m.options.map((_, i) => i))),
+    mcqChoice: selectedSection.mcqs.map(() => null),
+    code: '',
+    result: null
+  };
+  saveRec(cur);
+  setActive({ sectionId: cur.sectionId, sid });
+  pendingLogin = null;
+  openAssessment();
+}
+
+/* ---------- assessment ---------- */
+function openAssessment() {
+  $('landing').classList.add('hidden');
+  $('resultView').classList.add('hidden');
+  $('assessment').classList.remove('hidden');
+  renderAssessment();
+  startTimer();
+  window.scrollTo(0, 0);
+}
+function mcqHTML(m, qi) {
+  const order = cur.mcqOrder[qi];
+  const chosen = cur.mcqChoice[qi];
+  return `<div class="card">
+    <div class="qtag">Question ${qi + 1} · Multiple choice · 2 marks</div>
+    <p style="font-size:16px;white-space:pre-wrap">${esc(m.question)}</p>
+    ${order.map((origIdx, j) => `
+      <label class="opt"><input type="radio" name="mcq${qi}" value="${j}" ${chosen === j ? 'checked' : ''}>${esc(m.options[origIdx])}</label>`).join('')}
+  </div>`;
+}
+function renderAssessment() {
+  const sec = currentSection();
+  const c = sec.coding;
+  $('assessApp').innerHTML = `
+    <div class="top">
+      <div>
+        <div class="co-label">${esc(sec.company).toUpperCase()} | TECH ASSESSMENT</div>
+        <div class="sub">INTELLIBI · PYTHON TECHNICAL ASSESSMENT · Section ${sec.id}</div>
+        <div class="sub">${esc(cur.name)} · ID ${esc(cur.sid)}</div>
+      </div>
+      <div id="timerBox" class="timer"><span>Time left</span><b id="clock">05:00</b></div>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    ${sec.mcqs.map((m, qi) => mcqHTML(m, qi)).join('')}
+    <div class="card">
+      <div class="qtag">Question 3 · Python coding · 6 marks</div>
+      <h3 style="margin:6px 0">${esc(c.title)}</h3>
+      <p>${esc(c.statement)}</p>
+      <p><b>Input:</b> ${esc(c.input_description)}<br><b>Output:</b> ${esc(c.output_description)}</p>
+      <pre class="ex">${esc(c.example)}</pre>
+      <label for="editor">Your Python code</label>
+      <textarea id="editor" class="code" spellcheck="false">${esc(cur.code)}</textarea>
+      <label for="stdin">Custom input for RUN (optional, one line per input() call)</label>
+      <textarea id="stdin" class="stdin" spellcheck="false"></textarea>
+      <div class="btnrow"><button id="runBtn" class="run">RUN CODE</button></div>
+      <div class="note">RUN uses only the input you type above. Your submitted code is checked automatically against hidden test cases when you submit.</div>
+      <label>Console output</label>
+      <div id="console" class="console">Output will appear here.</div>
+    </div>
+    <div class="card" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <button id="submitBtn" class="primary">SUBMIT ASSESSMENT</button>
+      <span class="note">You cannot edit answers after submission. The timer submits automatically at 00:00.</span>
+    </div>`;
+
+  document.querySelectorAll('input[type=radio]').forEach((r) => r.addEventListener('change', (e) => {
+    const qi = Number(e.target.name.replace('mcq', ''));
+    cur.mcqChoice[qi] = Number(e.target.value);
+    saveRec(cur);
+  }));
+  $('editor').addEventListener('input', (e) => { cur.code = e.target.value; saveRec(cur); });
+  $('editor').addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const ta = e.target, s = ta.selectionStart;
+      ta.value = ta.value.slice(0, s) + '    ' + ta.value.slice(ta.selectionEnd);
+      ta.selectionStart = ta.selectionEnd = s + 4;
+      cur.code = ta.value; saveRec(cur);
+    }
+  });
+  $('runBtn').addEventListener('click', onRun);
+  $('submitBtn').addEventListener('click', () => {
+    if (confirm('Submit your assessment now? You cannot edit it afterwards.')) finalize(false);
+  });
+}
+
+async function onRun() {
+  const btn = $('runBtn'), con = $('console');
+  const code = $('editor').value;
+  btn.disabled = true;
+  con.className = 'console';
+  con.textContent = pyLoaded ? 'Running…' : 'Loading Python runtime (first run can take a little while)…';
+  const r = await runPython(code, $('stdin').value.replace(/\r/g, '') + (($('stdin').value.length && !$('stdin').value.endsWith('\n')) ? '\n' : ''));
+  btn.disabled = false;
+  if (r.loadError) {
+    con.className = 'console err';
+    con.textContent = 'The Python runtime could not be loaded. Your code was NOT executed.\nCheck your internet connection and reload the page.\n' + r.loadError;
+  } else if (r.timedOut) {
+    con.className = 'console err';
+    con.textContent = 'Time limit exceeded (4 seconds). Check for an infinite loop or a very slow operation.';
+  } else if (r.err) {
+    con.className = 'console err';
+    con.textContent = (r.out ? r.out + '\n' : '') + 'Error: ' + r.err;
+  } else {
+    con.textContent = r.out === '' ? '(program ran and printed nothing)' : r.out;
+  }
+}
+
+/* Timer: deadline is stored, so refresh and navigation never reset it. */
+function startTimer() {
+  stopTimer();
+  tick();
+  timerHandle = setInterval(tick, 250);
+}
+function stopTimer() { if (timerHandle) clearInterval(timerHandle); timerHandle = null; }
+function tick() {
+  if (!cur || cur.status !== 'in_progress') return;
+  const left = Math.max(0, cur.deadline - Date.now());
+  const clock = $('clock');
+  if (clock) clock.textContent = fmt(left);
+  const box = $('timerBox');
+  if (box) box.classList.toggle('urgent', left <= 60000 && left > 0);
+  const bar = $('bar');
+  if (bar) bar.style.width = (100 - (left / CONFIG.durationMs) * 100).toFixed(1) + '%';
+  if (left <= 0) finalize(true);
+}
+
+/* ---------- submission and scoring ---------- */
+async function finalize(auto) {
+  if (!cur || cur.status !== 'in_progress' || finalizing) return;
+  finalizing = true;
+  stopTimer();
+  $('overlayText').textContent = 'Grading your code against the test cases…';
+  $('overlay').classList.add('show');
+
+  const sec = currentSection();
+  const mcqDetail = sec.mcqs.map((m, qi) => {
+    const c = cur.mcqChoice[qi];
+    const correct = c !== null && cur.mcqOrder[qi][c] === m.answer;
+    return { correct, marks: correct ? 2 : 0, answered: c !== null };
+  });
+  const coding = await gradeCoding(cur.code, sec.coding.tests);
+  const mcqMarks = mcqDetail.reduce((a, d) => a + d.marks, 0);
+  const codingMarks = coding.loadError ? 0 : coding.marks;
+  const total = mcqMarks + codingMarks;
+
+  cur.result = {
+    mcq: mcqDetail,
+    mcqCorrect: mcqDetail.filter((d) => d.correct).length,
+    coding: { marks: codingMarks, passed: coding.passed, total: coding.total, blank: !!coding.blank, notGraded: !!coding.loadError, firstErrType: coding.firstErrType || null },
+    total,
+    percent: Math.round((total / 10) * 100),
+    category: coding.loadError ? 'Not graded' : category(total),
+    autoSubmitted: auto
+  };
+  cur.status = 'submitted';
+  cur.submittedAt = Date.now();
+  saveRec(cur);
+  setActive(null);
+  finalizing = false;
+  $('overlay').classList.remove('show');
+  renderResult();
+}
+
+/* ---------- result ---------- */
+function renderResult() {
+  stopTimer();
+  const sec = sectionById(cur.sectionId);
+  const r = cur.result;
+  const when = new Date(cur.submittedAt).toLocaleString();
+  const status = r.coding.notGraded
+    ? 'Submitted · coding NOT graded (Python runtime unavailable). Instructor review required.'
+    : (cur.autoSubmitted ? 'Auto-submitted when the timer expired' : 'Submitted by student');
+  const codingLine = r.coding.blank
+    ? 'Blank submission'
+    : (r.coding.notGraded ? 'Not graded' : `${r.coding.passed}/${r.coding.total} tests passed`);
+  const feedback = r.coding.notGraded
+    ? 'Your MCQ score is recorded. The coding answer could not be checked because the browser could not load the Python runtime. Your instructor will review it.'
+    : FEEDBACK[r.category];
+  const errNote = r.coding.firstErrType && !r.coding.notGraded
+    ? `<p class="note">Your code raised a ${esc(r.coding.firstErrType)} during testing. Check handling of the input format.</p>` : '';
+
+  $('resultApp').innerHTML = `
+    <div class="card">
+      <div class="result-head">
+        <div class="co-label">${esc(sec.company).toUpperCase()} | TECH ASSESSMENT</div>
+        <div class="sub">INTELLIBI · PYTHON TECHNICAL ASSESSMENT · Section ${sec.id}</div>
+      </div>
+      <table class="res">
+        <tr><td>Student name</td><td>${esc(cur.name)}</td></tr>
+        <tr><td>Student ID</td><td>${esc(cur.sid)}</td></tr>
+        <tr><td>Attempt ID</td><td>${esc(cur.attemptId)}</td></tr>
+        <tr><td>Date and time</td><td>${esc(when)}</td></tr>
+        <tr><td>MCQ 1</td><td>${r.mcq[0].marks}/2</td></tr>
+        <tr><td>MCQ 2</td><td>${r.mcq[1].marks}/2</td></tr>
+        <tr><td>Coding</td><td>${r.coding.notGraded ? 'Not graded' : r.coding.marks + '/6'}</td></tr>
+        <tr><td>Correct answers</td><td>${r.mcqCorrect}/2 MCQs · ${codingLine}</td></tr>
+        <tr><td>Completion status</td><td>${esc(status)}</td></tr>
+      </table>
+      <div class="total">${r.total}/10</div>
+      <div class="cat">${r.percent}% · ${esc(r.category)}</div>
+      <div class="feedback">${esc(feedback)}</div>
+      ${errNote}
+    </div>
+    <div class="btnrow noprint">
+      <button class="primary" id="printBtn">Print result</button>
+      <button id="downloadBtn">Download result (.txt)</button>
+      <button id="homeBtn">Back to sections</button>
+    </div>`;
+  $('printBtn').addEventListener('click', () => window.print());
+  $('downloadBtn').addEventListener('click', downloadResult);
+  $('homeBtn').addEventListener('click', goHome);
+
+  $('assessment').classList.add('hidden');
+  $('landing').classList.add('hidden');
+  $('resultView').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+function downloadResult() {
+  const sec = sectionById(cur.sectionId), r = cur.result;
+  const lines = [
+    `${sec.company.toUpperCase()} | TECH ASSESSMENT`,
+    'INTELLIBI · PYTHON TECHNICAL ASSESSMENT',
+    `Section: ${sec.id}`,
+    `Student: ${cur.name}`,
+    `Student ID: ${cur.sid}`,
+    `Attempt ID: ${cur.attemptId}`,
+    `Submitted: ${new Date(cur.submittedAt).toLocaleString()}`,
+    `MCQ 1: ${r.mcq[0].marks}/2`,
+    `MCQ 2: ${r.mcq[1].marks}/2`,
+    `Coding: ${r.coding.notGraded ? 'Not graded' : r.coding.marks + '/6'} (${r.coding.passed}/${r.coding.total} tests passed)`,
+    `Total: ${r.total}/10 (${r.percent}%) - ${r.category}`,
+    `Status: ${r.coding.notGraded ? 'Coding not graded' : (cur.autoSubmitted ? 'Auto-submitted at timer expiry' : 'Submitted by student')}`
+  ];
+  const blob = new Blob([lines.join('\n') + '\n'], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `${cur.attemptId}.txt`;
+  a.click();
+}
+function goHome() {
+  cur = null;
+  $('resultView').classList.add('hidden');
+  $('assessment').classList.add('hidden');
+  $('landing').classList.remove('hidden');
+  $('loginPanel').classList.add('hidden');
+  $('stuName').value = ''; $('stuId').value = '';
+}
+
+/* ---------- startup ---------- */
+async function init() {
+  $('continueBtn').addEventListener('click', onContinue);
+  $('cancelLogin').addEventListener('click', () => { $('loginPanel').classList.add('hidden'); pendingLogin = null; });
+  $('startBtn').addEventListener('click', onStart);
+  window.addEventListener('beforeunload', (e) => {
+    if (cur && cur.status === 'in_progress') { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  try {
+    const res = await fetch(CONFIG.bankUrl, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    bank = await res.json();
+  } catch (err) {
+    $('fatal').textContent = 'The question bank could not be loaded. Open this page through its web address (GitHub Pages or a local web server), not as a file. Details: ' + err.message;
+    $('fatal').classList.remove('hidden');
+    return;
+  }
+  renderGrid();
+
+  // Resume an attempt in progress after a refresh. The stored deadline is kept, so the timer is not reset.
+  const active = getActive();
+  if (active) {
+    const rec = loadRec(active.sectionId, active.sid);
+    if (rec && rec.status === 'in_progress') {
+      cur = rec;
+      openAssessment();
+      return;
+    }
+    setActive(null);
+  }
+}
+init();
+</script>
+</body>
+</html>
