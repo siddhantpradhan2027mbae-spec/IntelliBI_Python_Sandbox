@@ -1,0 +1,348 @@
+{
+  "meta": {
+    "title": "IntelliBI Python Technical Assessment",
+    "label_format": "[COMPANY NAME] | TECH ASSESSMENT",
+    "disclaimer": "Fictional, company-themed interview simulations inspired by broad industry expectations. Not official company assessments and not affiliated with or endorsed by any company named.",
+    "syllabus_source": "IntelliBI Python for Data Engineering, 2026 Edition, Modules 1-12",
+    "time_limit_seconds": 300,
+    "marks": {
+      "mcq_each": 2,
+      "mcq_total": 4,
+      "coding_max": 6,
+      "total": 10
+    },
+    "coding_rubric": {
+      "all_tests_pass": 6,
+      "more_than_80_percent_pass": 5,
+      "at_least_67_percent_pass": 4,
+      "at_least_50_percent_pass": 3,
+      "at_least_one_test_pass": 2,
+      "runs_with_output_but_no_test_passes": 1,
+      "blank_error_or_no_output": 0,
+      "notes": "Tests run the student's code with the given stdin and compare stdout after trimming trailing whitespace on each line. Marks depend only on the number of tests passed, never on the source text."
+    },
+    "mcq_notes": "answer is the zero-based index of the correct option in the original order. The HTML app shuffles option order at runtime and maps the correct answer back by option text."
+  },
+  "sections": [
+    {
+      "id": "01", "company": "Google", "role": "Associate Python Developer",
+      "mcqs": [
+        {"id": "S01-M1", "question": "What does type(3.0) return?", "options": ["int", "float", "complex", "str"], "answer": 1},
+        {"id": "S01-M2", "question": "What is the output of print(len((1, 2, 3)))?", "options": ["2", "3", "4", "TypeError"], "answer": 1}
+      ],
+      "coding": {"id": "S01-C1", "title": "Square of a Number", "statement": "Read an integer from input and print its square.", "input_description": "One integer n.", "output_description": "The value of n squared.", "example": "Input: 5\nOutput: 25", "tests": [{"stdin": "5\n", "expected": "25"}, {"stdin": "-3\n", "expected": "9"}, {"stdin": "0\n", "expected": "0"}, {"stdin": "12\n", "expected": "144"}]}
+    },
+    {
+      "id": "02", "company": "Microsoft", "role": "ETL Developer",
+      "mcqs": [
+        {"id": "S02-M1", "question": "Which built-in data type is immutable?", "options": ["list", "dict", "tuple", "set"], "answer": 2},
+        {"id": "S02-M2", "question": "d = {'a': 1}\nd['b'] = 2\nprint(len(d))\nWhat is printed?", "options": ["1", "2", "3", "KeyError"], "answer": 1}
+      ],
+      "coding": {"id": "S02-C1", "title": "Largest Value", "statement": "Read space-separated integers and print the largest one.", "input_description": "One line of space-separated integers.", "output_description": "The maximum integer.", "example": "Input: 3 9 2\nOutput: 9", "tests": [{"stdin": "3 9 2\n", "expected": "9"}, {"stdin": "-5 -1 -8\n", "expected": "-1"}, {"stdin": "7\n", "expected": "7"}, {"stdin": "4 4 4\n", "expected": "4"}]}
+    },
+    {
+      "id": "03", "company": "Amazon", "role": "Data Engineer",
+      "mcqs": [
+        {"id": "S03-M1", "question": "What is the output of print([1, 2, 3][::-1])?", "options": ["[3, 2, 1]", "[1, 2, 3]", "[2, 1, 3]", "IndexError"], "answer": 0},
+        {"id": "S03-M2", "question": "s = {1, 2, 2, 3}\nprint(len(s))\nWhat is printed?", "options": ["4", "3", "2", "TypeError"], "answer": 1}
+      ],
+      "coding": {"id": "S03-C1", "title": "Remove Duplicates, Keep Order", "statement": "Read space-separated words and print them with duplicates removed, keeping the first occurrence order.", "input_description": "One line of space-separated words.", "output_description": "The unique words joined by single spaces.", "example": "Input: b a b c a\nOutput: b a c", "tests": [{"stdin": "b a b c a\n", "expected": "b a c"}, {"stdin": "x\n", "expected": "x"}, {"stdin": "1 2 3\n", "expected": "1 2 3"}, {"stdin": "z z z\n", "expected": "z"}]}
+    },
+    {
+      "id": "04", "company": "Meta", "role": "Python Backend Developer",
+      "mcqs": [
+        {"id": "S04-M1", "question": "What is the output of print(5 // 2)?", "options": ["2.5", "2", "3", "1"], "answer": 1},
+        {"id": "S04-M2", "question": "Which clause in a try statement always runs, whether or not an exception occurred?", "options": ["except", "else", "finally", "raise"], "answer": 2}
+      ],
+      "coding": {"id": "S04-C1", "title": "Total Transaction Amount", "statement": "Read comma-separated transaction amounts and print their total with exactly two decimal places.", "input_description": "One line of comma-separated numbers (integers or decimals).", "output_description": "The total formatted to two decimal places.", "example": "Input: 10.5,20,4.25\nOutput: 34.75", "tests": [{"stdin": "10.5,20,4.25\n", "expected": "34.75"}, {"stdin": "100\n", "expected": "100.00"}, {"stdin": "0.1,0.2\n", "expected": "0.30"}, {"stdin": "5,5,5\n", "expected": "15.00"}]}
+    },
+    {
+      "id": "05", "company": "Apple", "role": "Junior Software Engineer",
+      "mcqs": [
+        {"id": "S05-M1", "question": "def f(a, b=2):\n    return a + b\nprint(f(1))\nWhat is printed?", "options": ["1", "2", "3", "TypeError"], "answer": 2},
+        {"id": "S05-M2", "question": "What is the output of print(\"Hello\".upper().lower())?", "options": ["HELLO", "hello", "Hello", "Error"], "answer": 1}
+      ],
+      "coding": {"id": "S05-C1", "title": "Character Frequency", "statement": "Read a string and print each distinct character (ignoring spaces) with its count, in order of first appearance. Format: character, a space, count, one line each.", "input_description": "One line of text. It may be empty.", "output_description": "One line per distinct non-space character: the character, a space, and its count.", "example": "Input: hello\nOutput:\nh 1\ne 1\nl 2\no 1", "tests": [{"stdin": "hello\n", "expected": "h 1\ne 1\nl 2\no 1"}, {"stdin": "aab\n", "expected": "a 2\nb 1"}, {"stdin": "a b\n", "expected": "a 1\nb 1"}, {"stdin": "\n", "expected": ""}]}
+    },
+    {
+      "id": "06", "company": "NVIDIA", "role": "Python Automation Engineer",
+      "mcqs": [
+        {"id": "S06-M1", "question": "What is the output of: for i in range(1, 10, 3): print(i)?", "options": ["1 4 7 (one per line)", "1 3 5 7 9 (one per line)", "3 6 9 (one per line)", "1 2 3 (one per line)"], "answer": 0},
+        {"id": "S06-M2", "question": "Which dictionary method returns a view of all values?", "options": ["keys()", "values()", "items()", "get()"], "answer": 1}
+      ],
+      "coding": {"id": "S06-C1", "title": "Total Per Key", "statement": "Read tokens in the form key number key number ... and print the total for each key, with keys in alphabetical order. Format: key, a space, total, one line per key.", "input_description": "One line of alternating keys (words) and integers.", "output_description": "One line per key in alphabetical order: key and total.", "example": "Input: a 1 b 2 a 3\nOutput:\na 4\nb 2", "tests": [{"stdin": "a 1 b 2 a 3\n", "expected": "a 4\nb 2"}, {"stdin": "x 5\n", "expected": "x 5"}, {"stdin": "b 1 a 1 b 1\n", "expected": "a 1\nb 2"}, {"stdin": "k 0\n", "expected": "k 0"}]}
+    },
+    {
+      "id": "07", "company": "Tesla", "role": "Data Engineer",
+      "mcqs": [
+        {"id": "S07-M1", "question": "What is the output of print([x * x for x in range(4)])?", "options": ["[0, 1, 4, 9]", "[1, 4, 9, 16]", "[0, 1, 2, 3]", "[0, 4, 8, 12]"], "answer": 0},
+        {"id": "S07-M2", "question": "What is the output of print(bool([]))?", "options": ["True", "False", "None", "Error"], "answer": 1}
+      ],
+      "coding": {"id": "S07-C1", "title": "Prime Check", "statement": "Read an integer and print Prime if it is a prime number, otherwise print Not Prime. Numbers less than 2 are not prime.", "input_description": "One integer n.", "output_description": "Either Prime or Not Prime.", "example": "Input: 13\nOutput: Prime", "tests": [{"stdin": "2\n", "expected": "Prime"}, {"stdin": "1\n", "expected": "Not Prime"}, {"stdin": "9\n", "expected": "Not Prime"}, {"stdin": "13\n", "expected": "Prime"}, {"stdin": "0\n", "expected": "Not Prime"}]}
+    },
+    {
+      "id": "08", "company": "Netflix", "role": "Associate Data Engineer",
+      "mcqs": [
+        {"id": "S08-M1", "question": "What is len(\"a,b,,c\".split(\",\")) ?", "options": ["3", "4", "2", "5"], "answer": 1},
+        {"id": "S08-M2", "question": "What is the output of print({1, 2, 3} & {2, 3, 4})?", "options": ["{1, 2, 3, 4}", "{2, 3}", "{1, 4}", "{4}"], "answer": 1}
+      ],
+      "coding": {"id": "S08-C1", "title": "Average Ignoring Missing Values", "statement": "Read comma-separated values. The token None represents a missing value and must be ignored. Print the average of the remaining numbers with two decimal places. If no valid numbers remain, print 0.00.", "input_description": "One line of comma-separated numbers or the token None.", "output_description": "The average to two decimal places, or 0.00.", "example": "Input: 4,None,6\nOutput: 5.00", "tests": [{"stdin": "4,None,6\n", "expected": "5.00"}, {"stdin": "None,None\n", "expected": "0.00"}, {"stdin": "1,2,3,4\n", "expected": "2.50"}, {"stdin": "10\n", "expected": "10.00"}]}
+    },
+    {
+      "id": "09", "company": "Adobe", "role": "ETL Developer",
+      "mcqs": [
+        {"id": "S09-M1", "question": "Which open() mode opens a file for writing and erases any existing content?", "options": ["r", "a", "w", "r+"], "answer": 2},
+        {"id": "S09-M2", "question": "What exception is raised by int(\"3.5\")?", "options": ["ValueError", "TypeError", "KeyError", "IndexError"], "answer": 0}
+      ],
+      "coding": {"id": "S09-C1", "title": "Count Vowels", "statement": "Read a line of text and print the number of vowels (a, e, i, o, u in either case).", "input_description": "One line of text.", "output_description": "The number of vowels as an integer.", "example": "Input: Hello World\nOutput: 3", "tests": [{"stdin": "Hello World\n", "expected": "3"}, {"stdin": "xyz\n", "expected": "0"}, {"stdin": "AEIOU\n", "expected": "5"}, {"stdin": "Python\n", "expected": "1"}]}
+    },
+    {
+      "id": "10", "company": "IBM", "role": "Python Developer",
+      "mcqs": [
+        {"id": "S10-M1", "question": "What is the output of print(10 % 3)?", "options": ["3", "1", "0", "3.33"], "answer": 1},
+        {"id": "S10-M2", "question": "What is the output of print(\"b\" in \"abc\")?", "options": ["True", "False", "Error", "None"], "answer": 0}
+      ],
+      "coding": {"id": "S10-C1", "title": "Count Even Numbers Up To n", "statement": "Read an integer n and print the number of even integers from 1 to n inclusive.", "input_description": "One integer n (0 or greater).", "output_description": "The count of even numbers in the range 1 to n.", "example": "Input: 10\nOutput: 5", "tests": [{"stdin": "10\n", "expected": "5"}, {"stdin": "1\n", "expected": "0"}, {"stdin": "7\n", "expected": "3"}, {"stdin": "0\n", "expected": "0"}]}
+    },
+    {
+      "id": "11", "company": "Accenture", "role": "Data Operations Engineer",
+      "mcqs": [
+        {"id": "S11-M1", "question": "Which statement skips the rest of the current loop iteration and moves to the next one?", "options": ["break", "continue", "pass", "return"], "answer": 1},
+        {"id": "S11-M2", "question": "What is the output of print(sorted([3, 1, 2], reverse=True))?", "options": ["[3, 2, 1]", "[1, 2, 3]", "[3, 1, 2]", "[2, 1, 3]"], "answer": 0}
+      ],
+      "coding": {"id": "S11-C1", "title": "Running Totals", "statement": "Read space-separated integers and print the running total after each number, separated by single spaces.", "input_description": "One line of space-separated integers.", "output_description": "The running totals on one line, separated by single spaces.", "example": "Input: 1 2 3 4\nOutput: 1 3 6 10", "tests": [{"stdin": "1 2 3 4\n", "expected": "1 3 6 10"}, {"stdin": "5\n", "expected": "5"}, {"stdin": "-1 1\n", "expected": "-1 0"}, {"stdin": "10 -5 5\n", "expected": "10 5 10"}]}
+    },
+    {
+      "id": "12", "company": "Deloitte", "role": "Junior Python Developer",
+      "mcqs": [
+        {"id": "S12-M1", "question": "What is the output of print(f\"{3.14159:.2f}\")?", "options": ["3.14159", "3.14", "3.1", "3.15"], "answer": 1},
+        {"id": "S12-M2", "question": "What is the output of print(list(range(5))[-1])?", "options": ["0", "4", "5", "IndexError"], "answer": 1}
+      ],
+      "coding": {"id": "S12-C1", "title": "Pass Rate", "statement": "Read a line of tokens in the form name score name score ... Count students whose score is 50 or more. Print that count as a percentage of all students, with two decimal places.", "input_description": "One line of alternating names and integer scores.", "output_description": "The percentage of students with score 50 or more, two decimals.", "example": "Input: Ali 40 Bina 75 Chen 60\nOutput: 66.67", "tests": [{"stdin": "Ali 40 Bina 75 Chen 60\n", "expected": "66.67"}, {"stdin": "A 10\n", "expected": "0.00"}, {"stdin": "A 60 B 70\n", "expected": "100.00"}, {"stdin": "A 50 B 49\n", "expected": "50.00"}]}
+    },
+    {
+      "id": "13", "company": "TCS", "role": "Associate Python Developer",
+      "mcqs": [
+        {"id": "S13-M1", "question": "What is the output of print(2 ** 3)?", "options": ["6", "8", "9", "5"], "answer": 1},
+        {"id": "S13-M2", "question": "Which standard library module provides date and time classes such as datetime?", "options": ["math", "datetime", "os", "sys"], "answer": 1}
+      ],
+      "coding": {"id": "S13-C1", "title": "Fahrenheit Conversion", "statement": "Read comma-separated Celsius temperatures. For each one, print the Fahrenheit value on its own line, formatted with one decimal place. Use F = C * 9 / 5 + 32.", "input_description": "One line of comma-separated numbers.", "output_description": "One line per temperature, formatted to one decimal place.", "example": "Input: 0,100\nOutput:\n32.0\n212.0", "tests": [{"stdin": "0,100\n", "expected": "32.0\n212.0"}, {"stdin": "-40\n", "expected": "-40.0"}, {"stdin": "37\n", "expected": "98.6"}, {"stdin": "10,20\n", "expected": "50.0\n68.0"}]}
+    },
+    {
+      "id": "14", "company": "Infosys", "role": "Python Automation Engineer",
+      "mcqs": [
+        {"id": "S14-M1", "question": "Which function from the os module deletes a file?", "options": ["os.delete()", "os.remove()", "os.erase()", "os.clear()"], "answer": 1},
+        {"id": "S14-M2", "question": "t = (1, 2)\nt[0] = 5\nWhat happens?", "options": ["t becomes (5, 2)", "TypeError is raised", "t becomes (1, 5)", "Nothing happens"], "answer": 1}
+      ],
+      "coding": {"id": "S14-C1", "title": "Second Largest Distinct Value", "statement": "Read space-separated integers and print the second largest distinct value. If there is no second distinct value, print None.", "input_description": "One line of space-separated integers.", "output_description": "The second largest distinct integer, or None.", "example": "Input: 5 3 9 9 7\nOutput: 7", "tests": [{"stdin": "5 3 9 9 7\n", "expected": "7"}, {"stdin": "1 2\n", "expected": "1"}, {"stdin": "4 4 4\n", "expected": "None"}, {"stdin": "10 -2 3\n", "expected": "3"}]}
+    },
+    {
+      "id": "15", "company": "Wipro", "role": "Data Engineer",
+      "mcqs": [
+        {"id": "S15-M1", "question": "What is the output of print(min({3: 'a', 1: 'b'}))?", "options": ["1", "3", "'a'", "'b'"], "answer": 0},
+        {"id": "S15-M2", "question": "What is the output of print(\"  hi \".strip())?", "options": ["  hi ", "hi ", "  hi", "hi"], "answer": 3}
+      ],
+      "coding": {"id": "S15-C1", "title": "Flatten Grouped Rows", "statement": "Read rows separated by semicolons, where each row contains space-separated integers. Print the flattened list of all integers in order, in the same format as a Python list.", "input_description": "One line. Rows are separated by ';', and integers within a row by spaces.", "output_description": "A Python list printed with print(), such as [1, 2, 3].", "example": "Input: 1 2;3;4 5 6\nOutput: [1, 2, 3, 4, 5, 6]", "tests": [{"stdin": "1 2;3;4 5 6\n", "expected": "[1, 2, 3, 4, 5, 6]"}, {"stdin": "7\n", "expected": "[7]"}, {"stdin": "1;2;3\n", "expected": "[1, 2, 3]"}, {"stdin": "8 9;10\n", "expected": "[8, 9, 10]"}]}
+    },
+    {
+      "id": "16", "company": "Cognizant", "role": "Junior Software Engineer",
+      "mcqs": [
+        {"id": "S16-M1", "question": "Which function call uses a keyword argument?", "options": ["f(1, 2)", "f(x=1)", "f(*[1])", "f(**{})"], "answer": 1},
+        {"id": "S16-M2", "question": "nums = [1, 2, 3]\nnums.append([4])\nprint(len(nums))\nWhat is printed?", "options": ["3", "4", "5", "6"], "answer": 1}
+      ],
+      "coding": {"id": "S16-C1", "title": "Sort Students by Score", "statement": "Read tokens in the form name score name score ... Print the names sorted by score from highest to lowest, separated by single spaces. Names with equal scores keep their input order.", "input_description": "One line of alternating names and integer scores.", "output_description": "Names separated by single spaces, highest score first.", "example": "Input: Ali 80 Bina 90 Chen 80\nOutput: Bina Ali Chen", "tests": [{"stdin": "Ali 80 Bina 90 Chen 80\n", "expected": "Bina Ali Chen"}, {"stdin": "A 1\n", "expected": "A"}, {"stdin": "X 5 Y 5\n", "expected": "X Y"}, {"stdin": "P 3 Q 9 R 6\n", "expected": "Q R P"}]}
+    },
+    {
+      "id": "17", "company": "Capgemini", "role": "Python Backend Developer",
+      "mcqs": [
+        {"id": "S17-M1", "question": "What is the main benefit of using with open(...) as f:?", "options": ["Faster file reads", "The file is closed automatically", "The file is created automatically", "The file is encrypted"], "answer": 1},
+        {"id": "S17-M2", "question": "What is the output of print(bool(\"False\"))?", "options": ["True", "False", "Error", "None"], "answer": 0}
+      ],
+      "coding": {"id": "S17-C1", "title": "Safe Integer Sum", "statement": "Read space-separated tokens. Add up every token that is a valid integer and ignore the rest. Use try and except to handle tokens that cannot be converted.", "input_description": "One line of space-separated tokens.", "output_description": "The sum of all valid integers as an integer.", "example": "Input: 1 two 3 4.5 -2\nOutput: 2", "tests": [{"stdin": "1 two 3 4.5 -2\n", "expected": "2"}, {"stdin": "abc\n", "expected": "0"}, {"stdin": "10 20\n", "expected": "30"}, {"stdin": "7 x 8\n", "expected": "15"}]}
+    },
+    {
+      "id": "18", "company": "Oracle", "role": "Data Engineer",
+      "mcqs": [
+        {"id": "S18-M1", "question": "d = {'a': 1}\nprint(d.get('x', 0))\nWhat is printed?", "options": ["KeyError", "None", "0", "''"], "answer": 2},
+        {"id": "S18-M2", "question": "What is len(set(['a', 'a', 'b']))?", "options": ["3", "2", "1", "Error"], "answer": 1}
+      ],
+      "coding": {"id": "S18-C1", "title": "Mean of Positive Numbers", "statement": "Read space-separated integers and print the average of only the positive numbers (greater than zero), with two decimal places. If there are no positive numbers, print 0.00.", "input_description": "One line of space-separated integers.", "output_description": "The average of the positive numbers to two decimals, or 0.00.", "example": "Input: 4 -1 6 0\nOutput: 5.00", "tests": [{"stdin": "4 -1 6 0\n", "expected": "5.00"}, {"stdin": "-1 -2\n", "expected": "0.00"}, {"stdin": "3\n", "expected": "3.00"}, {"stdin": "1 2 3\n", "expected": "2.00"}]}
+    },
+    {
+      "id": "19", "company": "Salesforce", "role": "Associate Data Engineer",
+      "mcqs": [
+        {"id": "S19-M1", "question": "What does json.load() accept as its argument?", "options": ["A string of JSON text", "A file object", "A dictionary", "A list"], "answer": 1},
+        {"id": "S19-M2", "question": "a = [1, 2, 3]\nb = a\nb.append(4)\nprint(len(a))\nWhat is printed?", "options": ["3", "4", "Error", "1"], "answer": 1}
+      ],
+      "coding": {"id": "S19-C1", "title": "Count Multiples of Three", "statement": "Read an integer n. Print how many integers from 1 to n inclusive are divisible by 3.", "input_description": "One integer n (0 or greater).", "output_description": "The count of multiples of 3 from 1 to n.", "example": "Input: 10\nOutput: 3", "tests": [{"stdin": "10\n", "expected": "3"}, {"stdin": "2\n", "expected": "0"}, {"stdin": "9\n", "expected": "3"}, {"stdin": "0\n", "expected": "0"}]}
+    },
+    {
+      "id": "20", "company": "SAP", "role": "Junior Python Developer",
+      "mcqs": [
+        {"id": "S20-M1", "question": "What is the output of print(7 / 2)?", "options": ["3", "3.5", "4", "3.0"], "answer": 1},
+        {"id": "S20-M2", "question": "What is the output of print(\"abc\"[1])?", "options": ["a", "b", "c", "bc"], "answer": 1}
+      ],
+      "coding": {"id": "S20-C1", "title": "Common Elements", "statement": "Read two lines. Each line contains space-separated integers. Print the integers that appear in both lines, sorted ascending, separated by single spaces. If there are none, print an empty line.", "input_description": "Two lines of space-separated integers.", "output_description": "Common integers sorted ascending, separated by single spaces.", "example": "Input:\n1 2 3 4\n3 4 5\nOutput: 3 4", "tests": [{"stdin": "1 2 3 4\n3 4 5\n", "expected": "3 4"}, {"stdin": "1 2\n3 4\n", "expected": ""}, {"stdin": "5 6\n6 5\n", "expected": "5 6"}, {"stdin": "1 1 2\n2\n", "expected": "2"}]}
+    },
+    {
+      "id": "21", "company": "JPMorgan Chase", "role": "Data Operations Engineer",
+      "mcqs": [
+        {"id": "S21-M1", "question": "What is the output of print(list(map(lambda x: x + 1, [1, 2])))?", "options": ["[1, 2]", "[2, 3]", "[1, 3]", "[3, 4]"], "answer": 1},
+        {"id": "S21-M2", "question": "What does filter() return in Python 3?", "options": ["A list", "A filter iterator object", "A tuple", "A set"], "answer": 1}
+      ],
+      "coding": {"id": "S21-C1", "title": "Title Case Report Lines", "statement": "Read a line of text and print it with the first letter of every word capitalised and the rest in lowercase, using the built-in string method title().", "input_description": "One line of text.", "output_description": "The text converted to title case.", "example": "Input: hello world from python\nOutput: Hello World From Python", "tests": [{"stdin": "hello world from python\n", "expected": "Hello World From Python"}, {"stdin": "PYTHON is FUN\n", "expected": "Python Is Fun"}, {"stdin": "a\n", "expected": "A"}, {"stdin": "data-engineer rocks\n", "expected": "Data-Engineer Rocks"}]}
+    },
+    {
+      "id": "22", "company": "Goldman Sachs", "role": "Python Automation Engineer",
+      "mcqs": [
+        {"id": "S22-M1", "question": "What is the output of print(10 == 10.0)?", "options": ["True", "False", "Error", "None"], "answer": 0},
+        {"id": "S22-M2", "question": "for i in range(3):\n    for j in range(3):\n        break\nWhat does the break do?", "options": ["Exits both loops", "Exits only the inner loop", "Raises an error", "Skips the value of i"], "answer": 1}
+      ],
+      "coding": {"id": "S22-C1", "title": "Count Words Longer Than k", "statement": "Read an integer k on the first line and a sentence on the second line. Print how many words in the sentence are longer than k characters.", "input_description": "Line 1: integer k. Line 2: a sentence of space-separated words.", "output_description": "The count of words whose length is greater than k.", "example": "Input:\n3\nthe quick brown fox\nOutput: 2", "tests": [{"stdin": "3\nthe quick brown fox\n", "expected": "2"}, {"stdin": "1\na bb ccc\n", "expected": "2"}, {"stdin": "5\nhello\n", "expected": "0"}, {"stdin": "0\nx y\n", "expected": "2"}]}
+    },
+    {
+      "id": "23", "company": "Morgan Stanley", "role": "Python Developer",
+      "mcqs": [
+        {"id": "S23-M1", "question": "Which dictionary method removes a key and returns its value?", "options": ["pop()", "remove()", "delete()", "discard()"], "answer": 0},
+        {"id": "S23-M2", "question": "What is the output of print(\"Python\".find(\"z\"))?", "options": ["0", "-1", "None", "Error"], "answer": 1}
+      ],
+      "coding": {"id": "S23-C1", "title": "Letters and Digits", "statement": "Read a line of text and print the number of letters and the number of digits in the format: letters X digits Y.", "input_description": "One line of text. It may be empty.", "output_description": "One line in the format: letters X digits Y.", "example": "Input: a1b2c3\nOutput: letters 3 digits 3", "tests": [{"stdin": "a1b2c3\n", "expected": "letters 3 digits 3"}, {"stdin": "Hi!\n", "expected": "letters 2 digits 0"}, {"stdin": "123\n", "expected": "letters 0 digits 3"}, {"stdin": "\n", "expected": "letters 0 digits 0"}]}
+    },
+    {
+      "id": "24", "company": "HSBC", "role": "Data Engineer",
+      "mcqs": [
+        {"id": "S24-M1", "question": "for i, v in enumerate(['a', 'b']):\n    print(i)\nWhat is the first value printed?", "options": ["0", "1", "'a'", "'b'"], "answer": 0},
+        {"id": "S24-M2", "question": "What is the output of print(round(2.7))?", "options": ["2", "3", "2.7", "2.0"], "answer": 1}
+      ],
+      "coding": {"id": "S24-C1", "title": "Anagram Check", "statement": "Read two lines of text. Print Yes if they are anagrams of each other, ignoring case, otherwise print No. Anagrams contain exactly the same letters with the same counts.", "input_description": "Two lines, each a single word.", "output_description": "Yes or No.", "example": "Input:\nlisten\nsilent\nOutput: Yes", "tests": [{"stdin": "listen\nsilent\n", "expected": "Yes"}, {"stdin": "cat\ndog\n", "expected": "No"}, {"stdin": "Aa\naA\n", "expected": "Yes"}, {"stdin": "abc\nab\n", "expected": "No"}]}
+    },
+    {
+      "id": "25", "company": "PayPal", "role": "Associate Python Developer",
+      "mcqs": [
+        {"id": "S25-M1", "question": "try:\n    print(1 / 0)\nexcept ZeroDivisionError:\n    print(\"A\")\nWhat is printed?", "options": ["A", "Error", "ZeroDivisionError", "Nothing"], "answer": 0},
+        {"id": "S25-M2", "question": "Which keyword is used to raise an exception manually?", "options": ["throw", "raise", "error", "except"], "answer": 1}
+      ],
+      "coding": {"id": "S25-C1", "title": "Oldest Customer", "statement": "Read tokens in the form name:age separated by spaces. Print the name with the highest age. If ages are tied, print the name that appears first in the input.", "input_description": "One line of tokens in the form name:age.", "output_description": "The name of the oldest entry.", "example": "Input: Ann:30 Ben:25 Cy:41\nOutput: Cy", "tests": [{"stdin": "Ann:30 Ben:25 Cy:41\n", "expected": "Cy"}, {"stdin": "A:1\n", "expected": "A"}, {"stdin": "X:5 Y:5\n", "expected": "X"}, {"stdin": "P:10 Q:20 R:20\n", "expected": "Q"}]}
+    },
+    {
+      "id": "26", "company": "Stripe", "role": "Junior Python Developer",
+      "mcqs": [
+        {"id": "S26-M1", "question": "What is the output of print(\"-\".join([\"a\", \"b\"]))?", "options": ["ab", "a-b", "a b", "-ab"], "answer": 1},
+        {"id": "S26-M2", "question": "What is the output of print(\"abc\" * 2)?", "options": ["abcabc", "abc2", "aabbcc", "Error"], "answer": 0}
+      ],
+      "coding": {"id": "S26-C1", "title": "Count Missing Values", "statement": "Read comma-separated values. Count how many entries are the token None and print that count.", "input_description": "One line of comma-separated values, where missing values are written as None.", "output_description": "The number of None entries as an integer.", "example": "Input: 1,None,2,None\nOutput: 2", "tests": [{"stdin": "1,None,2,None\n", "expected": "2"}, {"stdin": "None\n", "expected": "1"}, {"stdin": "3,4\n", "expected": "0"}, {"stdin": "None,None,None\n", "expected": "3"}]}
+    },
+    {
+      "id": "27", "company": "Uber", "role": "Python Automation Engineer",
+      "mcqs": [
+        {"id": "S27-M1", "question": "lst = [1, 2, 3]\nprint(lst.pop())\nWhat is printed?", "options": ["1", "2", "3", "None"], "answer": 2},
+        {"id": "S27-M2", "question": "What is the output of print(dict(zip(['a', 'b'], [1, 2])))?", "options": ["{'a': 1, 'b': 2}", "{'a': [1], 'b': [2]}", "[('a', 1)]", "Error"], "answer": 0}
+      ],
+      "coding": {"id": "S27-C1", "title": "Chunk a List", "statement": "Read an integer k on the first line and space-separated integers on the second line. Split the integers into consecutive groups of size k (the last group may be smaller). Print the groups as a Python list of lists.", "input_description": "Line 1: integer k (k is at least 1). Line 2: space-separated integers.", "output_description": "The chunks printed with print(), such as [[1, 2], [3]].", "example": "Input:\n2\n1 2 3 4 5\nOutput: [[1, 2], [3, 4], [5]]", "tests": [{"stdin": "2\n1 2 3 4 5\n", "expected": "[[1, 2], [3, 4], [5]]"}, {"stdin": "3\n1 2 3\n", "expected": "[[1, 2, 3]]"}, {"stdin": "1\n7 8\n", "expected": "[[7], [8]]"}, {"stdin": "4\n1 2\n", "expected": "[[1, 2]]"}]}
+    },
+    {
+      "id": "28", "company": "Airbnb", "role": "Associate Data Engineer",
+      "mcqs": [
+        {"id": "S28-M1", "question": "What is the type of x = (1,)?", "options": ["int", "tuple", "list", "set"], "answer": 1},
+        {"id": "S28-M2", "question": "What is the output of print(sum(range(1, 4)))?", "options": ["4", "5", "6", "10"], "answer": 2}
+      ],
+      "coding": {"id": "S28-C1", "title": "Minimum and Maximum", "statement": "Read space-separated integers and print the minimum and maximum values on one line, separated by a single space.", "input_description": "One line of space-separated integers.", "output_description": "The minimum and maximum separated by a space.", "example": "Input: 3 8 -2 5\nOutput: -2 8", "tests": [{"stdin": "3 8 -2 5\n", "expected": "-2 8"}, {"stdin": "7\n", "expected": "7 7"}, {"stdin": "1 1\n", "expected": "1 1"}, {"stdin": "0 -9\n", "expected": "-9 0"}]}
+    },
+    {
+      "id": "29", "company": "Spotify", "role": "Python Backend Developer",
+      "mcqs": [
+        {"id": "S29-M1", "question": "What is the output of print('a' < 'b')?", "options": ["True", "False", "Error", "None"], "answer": 0},
+        {"id": "S29-M2", "question": "Inside a function defined as def f(*args):, what type is args?", "options": ["list", "tuple", "dict", "set"], "answer": 1}
+      ],
+      "coding": {"id": "S29-C1", "title": "Count Vowel-Initial Words", "statement": "Read a line of space-separated words. Count the words that begin with a vowel (a, e, i, o, u), ignoring case.", "input_description": "One line of space-separated words.", "output_description": "The count of words starting with a vowel.", "example": "Input: apple Ball Orange tree\nOutput: 2", "tests": [{"stdin": "apple Ball Orange tree\n", "expected": "2"}, {"stdin": "a\n", "expected": "1"}, {"stdin": "xyz\n", "expected": "0"}, {"stdin": "Eel eel\n", "expected": "2"}]}
+    },
+    {
+      "id": "30", "company": "Atlassian", "role": "Junior Software Engineer",
+      "mcqs": [
+        {"id": "S30-M1", "question": "What is the output of print(sorted(['b', 'A', 'c']))?", "options": ["['A', 'b', 'c']", "['b', 'A', 'c']", "['A', 'B', 'C']", "Error"], "answer": 0},
+        {"id": "S30-M2", "question": "What is the purpose of the global keyword inside a function?", "options": ["To declare a local variable", "To modify a global variable from inside the function", "To import a module", "To create a constant"], "answer": 1}
+      ],
+      "coding": {"id": "S30-C1", "title": "Most Frequent Word", "statement": "Read a line of lowercase space-separated words. Print the word that appears most often. If there is a tie, print the one that appears first in the input.", "input_description": "One line of space-separated lowercase words.", "output_description": "The most frequent word.", "example": "Input: go stop go wait\nOutput: go", "tests": [{"stdin": "go stop go wait\n", "expected": "go"}, {"stdin": "a b\n", "expected": "a"}, {"stdin": "x y y x\n", "expected": "x"}, {"stdin": "red blue blue red blue\n", "expected": "blue"}]}
+    },
+    {
+      "id": "31", "company": "Cisco", "role": "Python Automation Engineer",
+      "mcqs": [
+        {"id": "S31-M1", "question": "What does os.getcwd() return?", "options": ["A list of files", "The current working directory as a string", "The operating system name", "The environment variables"], "answer": 1},
+        {"id": "S31-M2", "question": "What does sys.argv[0] contain?", "options": ["The Python version", "The name of the script being run", "The full list of command arguments", "The interpreter path"], "answer": 1}
+      ],
+      "coding": {"id": "S31-C1", "title": "Digit Sum", "statement": "Read an integer and print the sum of its digits. Ignore a leading minus sign.", "input_description": "One integer, possibly negative.", "output_description": "The sum of the absolute value's digits.", "example": "Input: 123\nOutput: 6", "tests": [{"stdin": "123\n", "expected": "6"}, {"stdin": "-45\n", "expected": "9"}, {"stdin": "0\n", "expected": "0"}, {"stdin": "9999\n", "expected": "36"}]}
+    },
+    {
+      "id": "32", "company": "Intel", "role": "Data Engineer",
+      "mcqs": [
+        {"id": "S32-M1", "question": "Which expression flattens m = [[1, 2], [3, 4]] into [1, 2, 3, 4]?", "options": ["[x for row in m for x in row]", "[[x] for x in m]", "[row for row in m]", "list(m[0] + m[1]) * 2"], "answer": 0},
+        {"id": "S32-M2", "question": "What does iterating over dict.items() produce?", "options": ["Keys only", "Values only", "(key, value) tuples", "Lists of values"], "answer": 2}
+      ],
+      "coding": {"id": "S32-C1", "title": "Transpose a Matrix", "statement": "Read rows separated by semicolons, where each row contains space-separated integers of equal length. Print the transposed matrix as a Python list of lists.", "input_description": "One line. Rows are separated by ';' and values within a row by spaces.", "output_description": "The transposed matrix printed with print().", "example": "Input: 1 2 3;4 5 6\nOutput: [[1, 4], [2, 5], [3, 6]]", "tests": [{"stdin": "1 2 3;4 5 6\n", "expected": "[[1, 4], [2, 5], [3, 6]]"}, {"stdin": "7\n", "expected": "[[7]]"}, {"stdin": "1 2;3 4\n", "expected": "[[1, 3], [2, 4]]"}, {"stdin": "5 6;7 8;9 10\n", "expected": "[[5, 7, 9], [6, 8, 10]]"}]}
+    },
+    {
+      "id": "33", "company": "Qualcomm", "role": "Associate Python Developer",
+      "mcqs": [
+        {"id": "S33-M1", "question": "What is the output of print(\"%d items\" % 3)?", "options": ["%d items", "3 items", "d items", "Error"], "answer": 1},
+        {"id": "S33-M2", "question": "What is the output of print(isinstance(3, int))?", "options": ["True", "False", "Error", "3"], "answer": 0}
+      ],
+      "coding": {"id": "S33-C1", "title": "Multiplication Table Row", "statement": "Read an integer n. Print the multiplication of n by 1, 2, 3, 4 and 5, one per line, in the format: n x k = result.", "input_description": "One integer n.", "output_description": "Five lines in the format n x k = result.", "example": "Input: 2\nOutput:\n2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10", "tests": [{"stdin": "2\n", "expected": "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10"}, {"stdin": "1\n", "expected": "1 x 1 = 1\n1 x 2 = 2\n1 x 3 = 3\n1 x 4 = 4\n1 x 5 = 5"}, {"stdin": "3\n", "expected": "3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9\n3 x 4 = 12\n3 x 5 = 15"}, {"stdin": "10\n", "expected": "10 x 1 = 10\n10 x 2 = 20\n10 x 3 = 30\n10 x 4 = 40\n10 x 5 = 50"}]}
+    },
+    {
+      "id": "34", "company": "Samsung", "role": "Junior Python Developer",
+      "mcqs": [
+        {"id": "S34-M1", "question": "What is the output of print(-7 // 2)?", "options": ["-3", "-4", "-3.5", "3"], "answer": 1},
+        {"id": "S34-M2", "question": "What is the output of print(\"Python\"[::2])?", "options": ["Pto", "Pyhn", "Python", "yhn"], "answer": 0}
+      ],
+      "coding": {"id": "S34-C1", "title": "Binary to Decimal", "statement": "Read a string containing only the characters 0 and 1 representing a binary number. Print its decimal value.", "input_description": "One binary string.", "output_description": "The decimal integer value.", "example": "Input: 1011\nOutput: 11", "tests": [{"stdin": "1011\n", "expected": "11"}, {"stdin": "0\n", "expected": "0"}, {"stdin": "1111\n", "expected": "15"}, {"stdin": "100000\n", "expected": "32"}]}
+    },
+    {
+      "id": "35", "company": "Walmart Global Tech", "role": "ETL Developer",
+      "mcqs": [
+        {"id": "S35-M1", "question": "Which statement creates a shallow copy of the list old?", "options": ["new = old", "new = old.copy()", "new = old is", "new = old[0]"], "answer": 1},
+        {"id": "S35-M2", "question": "What is the output of print(len({}))?", "options": ["0", "1", "None", "Error"], "answer": 0}
+      ],
+      "coding": {"id": "S35-C1", "title": "Remove Negative Values and Sum", "statement": "Read space-separated integers. Print the sum of the non-negative values (zero and above).", "input_description": "One line of space-separated integers.", "output_description": "The sum of values greater than or equal to zero.", "example": "Input: 4 -3 2 -1\nOutput: 6", "tests": [{"stdin": "4 -3 2 -1\n", "expected": "6"}, {"stdin": "-5 -6\n", "expected": "0"}, {"stdin": "0 0 9\n", "expected": "9"}, {"stdin": "10\n", "expected": "10"}]}
+    },
+    {
+      "id": "36", "company": "Flipkart", "role": "Data Engineer",
+      "mcqs": [
+        {"id": "S36-M1", "question": "Which exception is raised when open() cannot find the file?", "options": ["KeyError", "FileNotFoundError", "ValueError", "IndexError"], "answer": 1},
+        {"id": "S36-M2", "question": "What is the output of print(\"apple\" > \"banana\")?", "options": ["True", "False", "Error", "None"], "answer": 1}
+      ],
+      "coding": {"id": "S36-C1", "title": "Word Lengths Dictionary", "statement": "Read space-separated words. Print each distinct word and its length, one per line, in order of first appearance, in the format: word length.", "input_description": "One line of space-separated words.", "output_description": "One line per distinct word: the word, a space, and its length.", "example": "Input: cat dog cat\nOutput:\ncat 3\ndog 3", "tests": [{"stdin": "cat dog cat\n", "expected": "cat 3\ndog 3"}, {"stdin": "hello\n", "expected": "hello 5"}, {"stdin": "a bb a\n", "expected": "a 1\nbb 2"}, {"stdin": "x y z\n", "expected": "x 1\ny 1\nz 1"}]}
+    },
+    {
+      "id": "37", "company": "Swiggy", "role": "Associate Data Engineer",
+      "mcqs": [
+        {"id": "S37-M1", "question": "What does zip() return in Python 3?", "options": ["A list", "An iterator of tuples", "A dictionary", "A set"], "answer": 1},
+        {"id": "S37-M2", "question": "What type does csv.DictReader produce for each row?", "options": ["Lists", "Dictionaries", "Tuples", "Strings"], "answer": 1}
+      ],
+      "coding": {"id": "S37-C1", "title": "Order Summary Totals", "statement": "Read tokens in the form item:quantity separated by spaces. Print the total quantity across all items.", "input_description": "One line of tokens in the form item:quantity.", "output_description": "The sum of all quantities as an integer.", "example": "Input: rice:2 dal:3 oil:1\nOutput: 6", "tests": [{"stdin": "rice:2 dal:3 oil:1\n", "expected": "6"}, {"stdin": "tea:10\n", "expected": "10"}, {"stdin": "a:0 b:0\n", "expected": "0"}, {"stdin": "x:4 y:4 z:4\n", "expected": "12"}]}
+    },
+    {
+      "id": "38", "company": "Zomato", "role": "Python Backend Developer",
+      "mcqs": [
+        {"id": "S38-M1", "question": "What is the output of print(bool(0.0))?", "options": ["True", "False", "Error", "0"], "answer": 1},
+        {"id": "S38-M2", "question": "What is the first value produced by list(range(5, 0, -1))?", "options": ["0", "1", "5", "4"], "answer": 2}
+      ],
+      "coding": {"id": "S38-C1", "title": "Count Items Above a Threshold", "statement": "Read a threshold on the first line and space-separated integers on the second line. Print how many integers are strictly greater than the threshold.", "input_description": "Line 1: integer threshold. Line 2: space-separated integers.", "output_description": "The count of values greater than the threshold.", "example": "Input:\n5\n3 7 9 5\nOutput: 2", "tests": [{"stdin": "5\n3 7 9 5\n", "expected": "2"}, {"stdin": "0\n-1 0 1\n", "expected": "1"}, {"stdin": "10\n1 2\n", "expected": "0"}, {"stdin": "2\n3 3 3\n", "expected": "3"}]}
+    },
+    {
+      "id": "39", "company": "Anthropic", "role": "Junior Software Engineer",
+      "mcqs": [
+        {"id": "S39-M1", "question": "count = 0\nwhile count < 3:\n    count += 1\nprint(count)\nWhat is printed?", "options": ["0", "2", "3", "4"], "answer": 2},
+        {"id": "S39-M2", "question": "Which syntax catches both ValueError and TypeError in one except clause?", "options": ["except ValueError, TypeError:", "except (ValueError, TypeError):", "except ValueError and TypeError:", "except [ValueError, TypeError]:"], "answer": 1}
+      ],
+      "coding": {"id": "S39-C1", "title": "Stock Level Check", "statement": "Read an integer threshold on the first line and comma-separated product quantities on the second line. Print LOW if any quantity is below the threshold, otherwise print OK.", "input_description": "Line 1: integer threshold. Line 2: comma-separated integer quantities.", "output_description": "LOW or OK.", "example": "Input:\n5\n8,3,9\nOutput: LOW", "tests": [{"stdin": "5\n8,3,9\n", "expected": "LOW"}, {"stdin": "5\n5,6\n", "expected": "OK"}, {"stdin": "1\n0\n", "expected": "LOW"}, {"stdin": "10\n12,15,20\n", "expected": "OK"}]}
+    },
+    {
+      "id": "40", "company": "OpenAI", "role": "Python Developer",
+      "mcqs": [
+        {"id": "S40-M1", "question": "Since Python 3.7, in what order are dictionary keys returned when iterated?", "options": ["Random order", "Alphabetical order", "Insertion order", "Reverse insertion order"], "answer": 2},
+        {"id": "S40-M2", "question": "What is the output of print(type([]))?", "options": ["<class 'list'>", "<class 'tuple'>", "list", "[]"], "answer": 0}
+      ],
+      "coding": {"id": "S40-C1", "title": "Group Names by First Letter", "statement": "Read space-separated names. Group them by their first letter, converted to uppercase. Print one line per letter in alphabetical order, in the format: LETTER: name1, name2, keeping input order within each group.", "input_description": "One line of space-separated names.", "output_description": "One line per letter in alphabetical order: uppercase letter, colon, space, names joined by ', '.", "example": "Input: Ravi Asha Bina\nOutput:\nA: Asha\nB: Bina\nR: Ravi", "tests": [{"stdin": "Ravi Asha Bina\n", "expected": "A: Asha\nB: Bina\nR: Ravi"}, {"stdin": "Zed\n", "expected": "Z: Zed"}, {"stdin": "Al Am Bo\n", "expected": "A: Al, Am\nB: Bo"}, {"stdin": "cat Car\n", "expected": "C: cat, Car"}]}
+    }
+  ]
+}
